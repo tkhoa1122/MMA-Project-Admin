@@ -6,7 +6,7 @@ interface AuthContextType {
   user: User | null;
   token: string | null;
   loading: boolean;
-  login: (email: string, password: string) => Promise<void>;
+  login: (email: string, password: string, role: 'admin' | 'staff') => Promise<void>;
   logout: () => void;
   isAuthenticated: boolean;
 }
@@ -42,22 +42,23 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setLoading(false);
   }, []);
 
-  const login = async (email: string, password: string) => {
+  const login = async (email: string, password: string, role: 'admin' | 'staff') => {
     setLoading(true);
     try {
       // TODO: Replace with real API call
       // const response = await apiClient.post<AuthResponse>('/auth/login', { email, password });
       
       // Mock login
+      const userName = role === 'admin' ? 'Admin User' : 'Long Staff';
       const mockResponse: AuthResponse = {
         token: 'mock-jwt-token-' + Date.now(),
         user: {
-          id: '1',
-          name: 'Admin User',
+          id: role === 'admin' ? '1' : '2',
+          name: userName,
           email,
           phone: '0123456789',
-          role: 'admin',
-          avatar: 'https://ui-avatars.com/api/?name=Admin+User&background=5D7B6F&color=fff',
+          role,
+          avatar: `https://ui-avatars.com/api/?name=${userName.replace(' ', '+')}&background=5D7B6F&color=fff`,
           createdAt: new Date().toISOString(),
         },
       };

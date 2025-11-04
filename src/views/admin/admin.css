@@ -1,0 +1,97 @@
+/* Admin Theme - Scoped to .admin-app only */
+.admin-app {
+  --admin-primary: #5D7B6F;
+  --admin-secondary: #A4C3A2;
+  --admin-accent: #B0D4B8;
+  --admin-light: #EAE7D6;
+  --admin-highlight: #D7F9FA;
+  --admin-dark: #4a6159;
+}
+
+.admin-app * {
+  box-sizing: border-box;
+}
+
+.admin-app {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* Smooth scrollbar - Only for admin */
+.admin-app ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.admin-app ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.admin-app ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.admin-app ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Animation keyframes */
+@keyframes adminFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes adminSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.admin-app .animate-fade-in {
+  animation: adminFadeIn 0.3s ease-out;
+}
+
+.admin-app .animate-slide-in {
+  animation: adminSlideIn 0.3s ease-out;
+}
+
+/* Admin specific styles */
+.admin-layout {
+  background-color: var(--admin-light);
+}
+
+.admin-sidebar {
+  background: linear-gradient(180deg, var(--admin-primary) 0%, var(--admin-dark) 100%);
+}
+
+.admin-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(93, 123, 111, 0.08);
+  transition: all 0.3s ease;
+}
+
+.admin-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(93, 123, 111, 0.15);
+}
+
+.admin-gradient-bg {
+  background: linear-gradient(90deg, var(--admin-primary) 0%, var(--admin-dark) 100%);
+}
