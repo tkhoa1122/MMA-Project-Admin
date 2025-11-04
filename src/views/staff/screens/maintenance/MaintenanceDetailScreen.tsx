@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Button, Loading, Input } from '@/components/common';
-import { staffApi } from '../../services/api/staffApi';
-import type { MaintenanceTask, ChecklistItem } from '../../types/staff';
+import { staffApi } from '@/services';
+import type { MaintenanceTask, ChecklistItem } from '@/types';
 
 interface MaintenanceDetailScreenProps {
   taskId: string;

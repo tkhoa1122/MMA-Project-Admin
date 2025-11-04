@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Button, Loading } from '@/components/common';
-import { staffApi } from '../../services/api/staffApi';
-import type { MaintenanceTask } from '../../types/staff';
+import { staffApi } from '@/services';
+import type { MaintenanceTask } from '@/types';
 
 export const MyMaintenanceTasksScreen: React.FC = () => {
   const [tasks, setTasks] = useState<MaintenanceTask[]>([]);

@@ -4,3 +4,7 @@ export * from './api';
 export * from './appointment';
 export * from './invoice';
 export * from './statistics';
+export * from './staff';
+export * from './shift';
+export * from './maintenance';
+export * from './common';

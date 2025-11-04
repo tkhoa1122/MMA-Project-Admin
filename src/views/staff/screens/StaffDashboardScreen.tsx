@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Card, StatisticsCards, Loading, Button } from '@/components/common';
-import { staffApi } from '../services/api/staffApi';
-import type { DashboardStats, StatCard } from '../types/staff';
+import { Card, Loading, Button } from '@/components/common';
+import { StatisticsCard } from '@/components/common/StatisticsCard';
+import { staffApi } from '@/services';
+import type { StaffDashboardStats, StatCard } from '@/types';
 
 // Quick Action Card Component
 const QuickActionCard: React.FC<{ icon: string; title: string; subtitle: string }> = ({ icon, title, subtitle }) => {
@@ -52,7 +53,7 @@ const QuickActionCard: React.FC<{ icon: string; title: string; subtitle: string 
 };
 
 export const StaffDashboardScreen: React.FC = () => {
-  const [stats, setStats] = useState<DashboardStats | null>(null);
+  const [stats, setStats] = useState<StaffDashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -190,7 +191,16 @@ export const StaffDashboardScreen: React.FC = () => {
       </div>
 
       {/* Statistics Cards */}
-      <StatisticsCards stats={statCards} />
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+        gap: '20px',
+        marginBottom: '32px'
+      }}>
+        {statCards.map((stat, index) => (
+          <StatisticsCard key={index} stat={stat} />
+        ))}
+      </div>
 
       {/* Quick Actions */}
       <div style={{ marginTop: '32px' }}>

@@ -1,13 +1,29 @@
 import type { 
-  DashboardStats, 
+  StaffDashboardStats, 
   Shift, 
   MaintenanceTask, 
   StaffProfile,
-  Appointment 
-} from '@/staff/types/staff';
+} from '@/types';
+
+// Appointment type cho staff (khác với admin)
+export interface StaffAppointment {
+  id: string;
+  customerId: string;
+  customerName: string;
+  vehicleId: string;
+  vehiclePlate: string;
+  serviceType: string;
+  appointmentDate: string;
+  appointmentTime: string;
+  status: 'pending' | 'confirmed' | 'in-progress' | 'completed' | 'cancelled';
+  assignedTo?: string;
+  notes?: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
 // Mock Dashboard Stats
-export const mockDashboardStats: DashboardStats = {
+export const mockDashboardStats: StaffDashboardStats = {
   totalCustomers: 751,
   totalStaff: 21,
   totalTechnicians: 40,
@@ -289,7 +305,7 @@ export const mockStaffProfile: StaffProfile = {
 };
 
 // Mock Appointments
-export const mockAppointments: Appointment[] = [
+export const mockAppointments: StaffAppointment[] = [
   {
     id: '1',
     customerId: 'customer-1',

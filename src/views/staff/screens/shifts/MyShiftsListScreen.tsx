@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Button, Loading } from '@/components/common';
-import { staffApi } from '../../services/api/staffApi';
-import type { Shift } from '../../types/staff';
+import { staffApi } from '@/services';
+import type { Shift } from '@/types';
 
 export const MyShiftsListScreen: React.FC = () => {
   const [shifts, setShifts] = useState<Shift[]>([]);

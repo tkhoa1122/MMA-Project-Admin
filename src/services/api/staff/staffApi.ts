@@ -1,6 +1,6 @@
 import { apiClient } from '../apiClient';
 import type {
-  DashboardStats,
+  StaffDashboardStats,
   Shift,
   CreateShiftDto,
   UpdateShiftDto,
@@ -14,15 +14,15 @@ import type {
   UpdateProfileDto,
   ChangePasswordDto,
   AppSettings,
-  Appointment,
-} from '@/staff/types/staff';
+} from '@/types';
 import type { ApiResponse, PaginatedResponse, PaginationParams } from '@/types';
 import { 
   mockDashboardStats, 
   mockShifts, 
   mockMaintenanceTasks, 
   mockStaffProfile,
-  mockAppointments 
+  mockAppointments,
+  type StaffAppointment
 } from './mockData';
 
 // Helper to simulate API delay
@@ -31,7 +31,7 @@ const delay = (ms: number = 500) => new Promise(resolve => setTimeout(resolve, m
 // ============ Dashboard APIs ============
 export const dashboardApi = {
   // Lấy thống kê tổng quan
-  getStats: async (): Promise<ApiResponse<DashboardStats>> => {
+  getStats: async (): Promise<ApiResponse<StaffDashboardStats>> => {
     // Mock data for demo
     await delay(300);
     return {
@@ -46,7 +46,7 @@ export const dashboardApi = {
   },
 
   // Lấy thống kê theo khoảng thời gian
-  getStatsByDateRange: async (startDate: string, endDate: string): Promise<ApiResponse<DashboardStats>> => {
+  getStatsByDateRange: async (startDate: string, endDate: string): Promise<ApiResponse<StaffDashboardStats>> => {
     await delay(300);
     return {
       data: mockDashboardStats,
@@ -314,7 +314,7 @@ export const maintenanceApi = {
 // ============ Appointment APIs (for Staff) ============
 export const appointmentApi = {
   // Lấy danh sách lịch hẹn
-  getAppointments: async (params?: PaginationParams & { status?: string; date?: string }): Promise<PaginatedResponse<Appointment>> => {
+  getAppointments: async (params?: PaginationParams & { status?: string; date?: string }): Promise<PaginatedResponse<StaffAppointment>> => {
     await delay(400);
     let filteredAppointments = [...mockAppointments];
     
@@ -336,7 +336,7 @@ export const appointmentApi = {
   },
 
   // Lấy chi tiết lịch hẹn
-  getAppointmentById: async (appointmentId: string): Promise<ApiResponse<Appointment>> => {
+  getAppointmentById: async (appointmentId: string): Promise<ApiResponse<StaffAppointment>> => {
     await delay(300);
     const appointment = mockAppointments.find(a => a.id === appointmentId);
     return {
@@ -349,7 +349,7 @@ export const appointmentApi = {
   },
 
   // Cập nhật trạng thái lịch hẹn
-  updateAppointmentStatus: async (appointmentId: string, status: Appointment['status']): Promise<ApiResponse<Appointment>> => {
+  updateAppointmentStatus: async (appointmentId: string, status: StaffAppointment['status']): Promise<ApiResponse<StaffAppointment>> => {
     await delay(300);
     const appointment = mockAppointments.find(a => a.id === appointmentId);
     return {

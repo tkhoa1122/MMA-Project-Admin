@@ -12,6 +12,7 @@ import {
   Bell,
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
+import '../admin.css';
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -41,12 +42,15 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
   };
 
   return (
-    <div className="min-h-screen bg-[#EAE7D6]">
+    <div className="admin-app min-h-screen bg-[#EAE7D6]">
       {/* Sidebar */}
       <aside
+        style={{
+          background: 'linear-gradient(180deg, #5D7B6F 0%, #4a6159 100%)'
+        }}
         className={`fixed top-0 left-0 z-40 h-screen transition-transform ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } bg-linear-to-b from-[#5D7B6F] to-[#4a6159] w-64`}
+        } w-64`}
       >
         {/* Logo */}
         <div className="flex items-center justify-between p-6 border-b border-[#A4C3A2]/30">

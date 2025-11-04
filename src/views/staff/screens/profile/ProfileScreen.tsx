@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Button, Input, Loading } from '@/components/common';
-import { staffApi } from '../../services/api/staffApi';
-import type { StaffProfile, UpdateProfileDto } from '../../types/staff';
+import { staffApi } from '@/services';
+import type { StaffProfile, UpdateProfileDto } from '@/types';
 
 export const ProfileScreen: React.FC = () => {
   const [profile, setProfile] = useState<StaffProfile | null>(null);

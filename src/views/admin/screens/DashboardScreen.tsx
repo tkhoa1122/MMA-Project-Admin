@@ -103,34 +103,81 @@ export const DashboardScreen: React.FC = () => {
           return (
             <div
               key={index}
-              className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow"
+              style={{
+                background: 'white',
+                borderRadius: '16px',
+                padding: '24px',
+                boxShadow: '0 2px 8px rgba(93, 123, 111, 0.08)',
+                border: '1px solid #f3f4f6',
+                transition: 'all 0.3s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 12px 24px rgba(93, 123, 111, 0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 2px 8px rgba(93, 123, 111, 0.08)';
+              }}
             >
-              <div className="flex items-start justify-between">
-                <div className="flex-1">
-                  <p className="text-gray-600 text-sm font-medium mb-2">{card.title}</p>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-3">
+              <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+                <div style={{ flex: 1 }}>
+                  <p style={{ 
+                    color: '#6b7280', 
+                    fontSize: '14px', 
+                    fontWeight: '500',
+                    marginBottom: '8px'
+                  }}>
+                    {card.title}
+                  </p>
+                  <h3 style={{ 
+                    fontSize: '32px', 
+                    fontWeight: '700', 
+                    color: '#111827',
+                    marginBottom: '12px',
+                    lineHeight: '1'
+                  }}>
                     {card.value}
                   </h3>
                   {card.growth !== undefined && (
-                    <div className="flex items-center space-x-1">
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                       {card.growth > 0 ? (
-                        <TrendingUp className="text-green-500" size={16} />
+                        <TrendingUp style={{ color: '#10b981' }} size={16} />
                       ) : (
-                        <TrendingDown className="text-red-500" size={16} />
+                        <TrendingDown style={{ color: '#ef4444' }} size={16} />
                       )}
-                      <span
-                        className={`text-sm font-medium ${
-                          card.growth > 0 ? 'text-green-500' : 'text-red-500'
-                        }`}
-                      >
+                      <span style={{ 
+                        fontSize: '13px', 
+                        fontWeight: '600',
+                        color: card.growth > 0 ? '#10b981' : '#ef4444'
+                      }}>
                         {Math.abs(card.growth)}%
                       </span>
-                      <span className="text-gray-500 text-sm">so với tháng trước</span>
+                      <span style={{ fontSize: '13px', color: '#9ca3af' }}>
+                        so với tháng trước
+                      </span>
                     </div>
                   )}
                 </div>
-                <div className={`${card.lightBg} p-3 rounded-lg`}>
-                  <Icon className={card.textColor} size={24} />
+                <div style={{
+                  width: '56px',
+                  height: '56px',
+                  borderRadius: '16px',
+                  background: card.lightBg.includes('yellow') ? 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)' :
+                              card.lightBg.includes('green') ? 'linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%)' :
+                              'linear-gradient(135deg, #B0D4B8 0%, #A4C3A2 100%)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0
+                }}>
+                  <Icon 
+                    style={{ 
+                      color: card.textColor.includes('yellow') ? '#d97706' : 
+                              card.textColor.includes('green') ? '#059669' : '#5D7B6F'
+                    }} 
+                    size={28} 
+                  />
                 </div>
               </div>
             </div>
@@ -191,7 +238,12 @@ export const DashboardScreen: React.FC = () => {
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-linear-to-r from-[#5D7B6F] to-[#4a6159] rounded-xl shadow-lg p-8 text-white">
+      <div 
+        style={{
+          background: 'linear-gradient(90deg, #5D7B6F 0%, #4a6159 100%)'
+        }}
+        className="rounded-xl shadow-lg p-8 text-white"
+      >
         <h3 className="text-2xl font-bold mb-4">Quản lý nhanh</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <button className="bg-white bg-opacity-20 hover:bg-opacity-30 backdrop-blur-sm px-6 py-4 rounded-lg font-medium transition-all text-left">
