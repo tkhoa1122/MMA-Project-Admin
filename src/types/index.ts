@@ -23,3 +23,6 @@ export interface PaginatedResponse<T> {
   page: number;
   totalPages: number;
 }
+
+// Export staff types
+export * from './staff';

@@ -1,5 +1,7 @@
-export * from './DashboardScreen';
 export * from './StaffDashboardScreen';
+
+// Auth Screens
+export * from './auth/LoginScreen';
 
 // Shift Management Screens
 export * from './shifts/MyShiftsListScreen';
