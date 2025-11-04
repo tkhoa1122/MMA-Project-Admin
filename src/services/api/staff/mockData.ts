@@ -4,7 +4,7 @@ import type {
   MaintenanceTask, 
   StaffProfile,
   Appointment 
-} from '@/types/staff';
+} from '@/staff/types/staff';
 
 // Mock Dashboard Stats
 export const mockDashboardStats: DashboardStats = {

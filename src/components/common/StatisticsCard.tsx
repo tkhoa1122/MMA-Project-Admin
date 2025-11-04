@@ -1,15 +1,16 @@
 import React from 'react';
-import { Card } from './Card';
-import type { StatCard as StatCardType } from '@/types/staff';
+import type { StatCard as StatCardType } from '@/staff/types/staff';
 
 interface StatisticsCardProps {
   stats: StatCardType[];
 }
 
+type ColorType = 'green' | 'blue' | 'red' | 'purple' | 'orange' | 'yellow';
+
 export const StatisticsCard: React.FC<{ stat: StatCardType }> = ({ stat }) => {
   const [isHovered, setIsHovered] = React.useState(false);
 
-  const colors = {
+  const colors: Record<ColorType, { bg: string; border: string; gradient: string; shadow: string }> = {
     green: { bg: '#ffffff', border: '#10b981', gradient: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', shadow: 'rgba(16, 185, 129, 0.3)' },
     blue: { bg: '#ffffff', border: '#3b82f6', gradient: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)', shadow: 'rgba(59, 130, 246, 0.3)' },
     red: { bg: '#ffffff', border: '#ef4444', gradient: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)', shadow: 'rgba(239, 68, 68, 0.3)' },
@@ -18,7 +19,7 @@ export const StatisticsCard: React.FC<{ stat: StatCardType }> = ({ stat }) => {
     yellow: { bg: '#ffffff', border: '#eab308', gradient: 'linear-gradient(135deg, #eab308 0%, #ca8a04 100%)', shadow: 'rgba(234, 179, 8, 0.3)' },
   };
 
-  const color = colors[stat.color];
+  const color = colors[stat.color as ColorType];
   const trendColor = stat.trend && stat.trend >= 0 ? '#10b981' : '#ef4444';
 
   return (

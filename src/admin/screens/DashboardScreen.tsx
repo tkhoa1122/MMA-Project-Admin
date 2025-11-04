@@ -9,7 +9,7 @@ import {
 } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
 import type { DashboardStats, RevenueChart } from '@/types';
-import { dashboardApi } from '@/services/api/mockApi';
+import { dashboardApi } from '@/services';
 import { Loading } from '@/components/common';
 
 export const DashboardScreen: React.FC = () => {

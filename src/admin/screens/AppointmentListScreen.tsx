@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, Filter, Eye, UserCheck, X } from 'lucide-react';
 import type { Appointment, AppointmentStatus } from '@/types';
-import { appointmentApi } from '@/services/api/mockApi';
+import { appointmentApi } from '@/services';
 import { Loading } from '@/components/common';
 
 export const AppointmentListScreen: React.FC = () => {

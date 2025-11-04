@@ -1,4 +1,4 @@
-import { apiClient } from './apiClient';
+import { apiClient } from '../apiClient';
 import type {
   DashboardStats,
   Shift,
@@ -15,7 +15,7 @@ import type {
   ChangePasswordDto,
   AppSettings,
   Appointment,
-} from '@/types/staff';
+} from '@/staff/types/staff';
 import type { ApiResponse, PaginatedResponse, PaginationParams } from '@/types';
 import { 
   mockDashboardStats, 
@@ -71,11 +71,14 @@ export const shiftApi = {
       filteredShifts = filteredShifts.filter(s => s.status === params.status);
     }
     
+    const limit = params?.limit || 10;
+    
     return {
       data: filteredShifts,
       total: filteredShifts.length,
       page: params?.page || 1,
-      totalPages: Math.ceil(filteredShifts.length / (params?.limit || 10))
+      limit,
+      totalPages: Math.ceil(filteredShifts.length / limit)
     };
     // const response = await apiClient.get('/staff/shifts', { params });
     // return response.data;
@@ -173,11 +176,14 @@ export const maintenanceApi = {
       filteredTasks = filteredTasks.filter(t => t.priority === params.priority);
     }
     
+    const limit = params?.limit || 10;
+    
     return {
       data: filteredTasks,
       total: filteredTasks.length,
       page: params?.page || 1,
-      totalPages: Math.ceil(filteredTasks.length / (params?.limit || 10))
+      limit,
+      totalPages: Math.ceil(filteredTasks.length / limit)
     };
     // const response = await apiClient.get('/staff/maintenance', { params });
     // return response.data;
@@ -316,11 +322,14 @@ export const appointmentApi = {
       filteredAppointments = filteredAppointments.filter(a => a.status === params.status);
     }
     
+    const limit = params?.limit || 10;
+    
     return {
       data: filteredAppointments,
       total: filteredAppointments.length,
       page: params?.page || 1,
-      totalPages: Math.ceil(filteredAppointments.length / (params?.limit || 10))
+      limit,
+      totalPages: Math.ceil(filteredAppointments.length / limit)
     };
     // const response = await apiClient.get('/staff/appointments', { params });
     // return response.data;
