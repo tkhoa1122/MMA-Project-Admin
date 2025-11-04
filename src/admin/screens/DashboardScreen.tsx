@@ -191,7 +191,7 @@ export const DashboardScreen: React.FC = () => {
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-gradient-to-r from-[#5D7B6F] to-[#4a6159] rounded-xl shadow-lg p-8 text-white">
+      <div className="bg-linear-to-r from-[#5D7B6F] to-[#4a6159] rounded-xl shadow-lg p-8 text-white">
         <h3 className="text-2xl font-bold mb-4">Quản lý nhanh</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <button className="bg-white bg-opacity-20 hover:bg-opacity-30 backdrop-blur-sm px-6 py-4 rounded-lg font-medium transition-all text-left">

@@ -46,7 +46,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
       <aside
         className={`fixed top-0 left-0 z-40 h-screen transition-transform ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } bg-gradient-to-b from-[#5D7B6F] to-[#4a6159] w-64`}
+        } bg-linear-to-b from-[#5D7B6F] to-[#4a6159] w-64`}
       >
         {/* Logo */}
         <div className="flex items-center justify-between p-6 border-b border-[#A4C3A2]/30">

@@ -29,11 +29,11 @@ export const LoginScreen: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#EAE7D6] via-[#D7F9FA]/20 to-[#B0D4B8]/30 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-linear-to-br from-[#EAE7D6] via-[#D7F9FA]/20 to-[#B0D4B8]/30 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         {/* Logo & Title */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#5D7B6F] to-[#4a6159] rounded-2xl mb-4 shadow-lg">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-linear-to-br from-[#5D7B6F] to-[#4a6159] rounded-2xl mb-4 shadow-lg">
             <span className="text-[#D7F9FA] font-bold text-2xl">EV</span>
           </div>
           <h1 className="text-3xl font-bold text-[#5D7B6F] mb-2">EVCare Admin</h1>
@@ -97,7 +97,7 @@ export const LoginScreen: React.FC = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-gradient-to-r from-[#5D7B6F] to-[#4a6159] text-white py-3 rounded-lg font-medium hover:from-[#4a6159] hover:to-[#3a4a43] focus:ring-4 focus:ring-[#A4C3A2] disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-xl"
+              className="w-full bg-linear-to-r from-[#5D7B6F] to-[#4a6159] text-white py-3 rounded-lg font-medium hover:from-[#4a6159] hover:to-[#3a4a43] focus:ring-4 focus:ring-[#A4C3A2] disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-xl"
             >
               {loading ? (
                 <span className="flex items-center justify-center">
