@@ -1,28 +1,10 @@
-// Export all types from here
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-  role: 'admin' | 'user';
-}
-
-export interface ApiResponse<T> {
-  data: T;
-  message: string;
-  success: boolean;
-}
-
-export interface PaginationParams {
-  page: number;
-  limit: number;
-}
-
-export interface PaginatedResponse<T> {
-  data: T[];
-  total: number;
-  page: number;
-  totalPages: number;
-}
-
-// Export staff types
+// Re-export all types from individual files
+export * from './user';
+export * from './api';
+export * from './appointment';
+export * from './invoice';
+export * from './statistics';
 export * from './staff';
+export * from './shift';
+export * from './maintenance';
+export * from './common';
