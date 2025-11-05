@@ -3,7 +3,7 @@ import { Card, Button, Loading } from '@/components/common';
 import { staffApi } from '@/services';
 import type { MaintenanceTask } from '@/types';
 
-export const MyMaintenanceTasksScreen: React.FC = () => {
+export const MaintenanceScreen: React.FC = () => {
   const [tasks, setTasks] = useState<MaintenanceTask[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<'all' | 'pending' | 'in-progress' | 'completed'>('all');
@@ -70,17 +70,17 @@ export const MyMaintenanceTasksScreen: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen">
+      <div className="flex items-center justify-center h-64">
         <Loading />
       </div>
     );
   }
 
   return (
-    <div className="p-6">
+    <div>
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Công việc bảo dưỡng của tôi</h1>
-        <p className="text-gray-600">Quản lý nhiệm vụ bảo dưỡng được giao</p>
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">Quản lý bảo trì</h1>
+        <p className="text-gray-600">Quản lý nhiệm vụ bảo dưỡng và sửa chữa</p>
       </div>
 
       {/* Filters */}

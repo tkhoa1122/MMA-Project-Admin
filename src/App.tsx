@@ -2,15 +2,19 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from '@/contexts/AuthContext';
 import { AdminLayout } from '@/views/admin/layouts/AdminLayout';
-import { StaffLayout } from '@/views/staff/layouts/StaffLayout';
 import { LoginScreen } from './LoginScreen';
-import { DashboardScreen } from '@/views/admin/screens/DashboardScreen';
-import { AppointmentListScreen } from '@/views/admin/screens/AppointmentListScreen';
-import { StaffDashboardScreen } from '@/views/staff/screens/StaffDashboardScreen';
+import { 
+  DashboardScreen, 
+  AppointmentListScreen, 
+  ShiftsScreen,
+  MaintenanceScreen,
+  ProfileScreen,
+  ApiTestScreen
+} from '@/views/admin/screens';
 
 // Protected Route Component
-const ProtectedRoute: React.FC<{ children: React.ReactElement; allowedRole?: 'admin' | 'staff' }> = ({ children, allowedRole }) => {
-  const { isAuthenticated, loading, user } = useAuth();
+const ProtectedRoute: React.FC<{ children: React.ReactElement }> = ({ children }) => {
+  const { isAuthenticated, loading } = useAuth();
 
   if (loading) {
     return (
@@ -22,16 +26,6 @@ const ProtectedRoute: React.FC<{ children: React.ReactElement; allowedRole?: 'ad
 
   if (!isAuthenticated) {
     return <Navigate to="/" replace />;
-  }
-
-  // Check role if specified
-  if (allowedRole && user?.role !== allowedRole) {
-    // Redirect to appropriate dashboard based on user role
-    if (user?.role === 'admin') {
-      return <Navigate to="/admin" replace />;
-    } else {
-      return <Navigate to="/staff" replace />;
-    }
   }
 
   return children;
@@ -50,12 +44,8 @@ const PublicRoute: React.FC<{ children: React.ReactElement }> = ({ children }) =
   }
 
   if (isAuthenticated) {
-    // Redirect based on user role
-    if (user?.role === 'admin') {
-      return <Navigate to="/admin" replace />;
-    } else {
-      return <Navigate to="/staff" replace />;
-    }
+    // Redirect to admin - staff now uses same interface
+    return <Navigate to="/admin" replace />;
   }
 
   return children;
@@ -74,11 +64,11 @@ function AppRoutes() {
         }
       />
 
-      {/* Protected Admin Routes */}
+      {/* Protected Routes - All users now use admin interface */}
       <Route
         path="/admin"
         element={
-          <ProtectedRoute allowedRole="admin">
+          <ProtectedRoute>
             <AdminLayout>
               <DashboardScreen />
             </AdminLayout>
@@ -88,7 +78,7 @@ function AppRoutes() {
       <Route
         path="/admin/appointments"
         element={
-          <ProtectedRoute allowedRole="admin">
+          <ProtectedRoute>
             <AdminLayout>
               <AppointmentListScreen />
             </AdminLayout>
@@ -96,27 +86,42 @@ function AppRoutes() {
         }
       />
       <Route
-        path="/admin/invoices"
+        path="/admin/shifts"
         element={
-          <ProtectedRoute allowedRole="admin">
+          <ProtectedRoute>
             <AdminLayout>
-              <div className="text-center py-12">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Invoice Management</h2>
-                <p className="text-gray-600">Coming soon...</p>
-              </div>
+              <ShiftsScreen />
             </AdminLayout>
           </ProtectedRoute>
         }
       />
-
-      {/* Protected Staff Routes */}
       <Route
-        path="/staff"
+        path="/admin/maintenance"
         element={
-          <ProtectedRoute allowedRole="staff">
-            <StaffLayout>
-              <StaffDashboardScreen />
-            </StaffLayout>
+          <ProtectedRoute>
+            <AdminLayout>
+              <MaintenanceScreen />
+            </AdminLayout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/profile"
+        element={
+          <ProtectedRoute>
+            <AdminLayout>
+              <ProfileScreen />
+            </AdminLayout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/api-test"
+        element={
+          <ProtectedRoute>
+            <AdminLayout>
+              <ApiTestScreen />
+            </AdminLayout>
           </ProtectedRoute>
         }
       />

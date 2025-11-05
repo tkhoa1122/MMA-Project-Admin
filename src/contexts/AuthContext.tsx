@@ -45,42 +45,60 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const login = async (email: string, password: string, role: 'admin' | 'staff') => {
     setLoading(true);
     try {
-      // TODO: Replace with real API call
-      // const response = await apiClient.post<AuthResponse>('/auth/login', { email, password });
+      // 🔥 REAL API - Gọi backend API thật
+      const { backendApi } = await import('@/services');
+      const response = await backendApi.auth.login({ email, password });
       
-      // Mock login
-      const userName = role === 'admin' ? 'Admin User' : 'Long Staff';
-      const mockResponse: AuthResponse = {
-        token: 'mock-jwt-token-' + Date.now(),
-        user: {
-          id: role === 'admin' ? '1' : '2',
-          name: userName,
-          email,
-          phone: '0123456789',
-          role,
-          avatar: `https://ui-avatars.com/api/?name=${userName.replace(' ', '+')}&background=5D7B6F&color=fff`,
-          createdAt: new Date().toISOString(),
-        },
-      };
+      // Backend trả về: { data: { token, refreshToken?, user }, message, success }
+      const { token: authToken, user: authUser, refreshToken } = response.data;
 
-      localStorage.setItem('token', mockResponse.token);
-      localStorage.setItem('user', JSON.stringify(mockResponse.user));
+      // Lưu token
+      localStorage.setItem('token', authToken);
+      if (refreshToken) {
+        localStorage.setItem('refreshToken', refreshToken);
+      }
       
-      setToken(mockResponse.token);
-      setUser(mockResponse.user);
-    } catch (error) {
+      // Chuẩn hóa user object (backend dùng _id, frontend dùng id)
+      const normalizedUser: User = {
+        id: authUser._id || authUser.id,
+        name: authUser.name,
+        email: authUser.email,
+        phone: authUser.phone || '',
+        role: authUser.role as 'admin' | 'staff',
+        avatar: authUser.avatar,
+        createdAt: authUser.createdAt || new Date().toISOString(),
+      };
+      
+      localStorage.setItem('user', JSON.stringify(normalizedUser));
+      
+      setToken(authToken);
+      setUser(normalizedUser);
+    } catch (error: any) {
       console.error('Login failed:', error);
-      throw error;
+      // Backend trả về error format: { message, success: false }
+      const errorMessage = error.response?.data?.message || error.message || 'Đăng nhập thất bại';
+      throw new Error(errorMessage);
     } finally {
       setLoading(false);
     }
   };
 
-  const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    setToken(null);
-    setUser(null);
+  const logout = async () => {
+    try {
+      // Gọi backend logout API
+      const { backendApi } = await import('@/services');
+      await backendApi.auth.logout();
+    } catch (error) {
+      console.error('Logout API failed:', error);
+      // Vẫn logout ở client dù API fail
+    } finally {
+      // Clear local storage
+      localStorage.removeItem('token');
+      localStorage.removeItem('refreshToken');
+      localStorage.removeItem('user');
+      setToken(null);
+      setUser(null);
+    }
   };
 
   const value: AuthContextType = {

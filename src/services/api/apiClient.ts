@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Cấu hình API client
 export const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000/api',
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000/api/v1',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
@@ -30,7 +30,9 @@ apiClient.interceptors.response.use(
     if (error.response?.status === 401) {
       // Redirect to login
       localStorage.removeItem('token');
-      window.location.href = '/login';
+      localStorage.removeItem('refreshToken');
+      localStorage.removeItem('user');
+      window.location.href = '/';
     }
     return Promise.reject(error);
   }

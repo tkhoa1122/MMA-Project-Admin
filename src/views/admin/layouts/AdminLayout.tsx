@@ -27,7 +27,10 @@ interface NavItem {
 const navItems: NavItem[] = [
   { label: 'Dashboard', path: '/admin', icon: LayoutDashboard },
   { label: 'Lịch hẹn', path: '/admin/appointments', icon: Calendar },
-  { label: 'Hóa đơn', path: '/admin/invoices', icon: FileText },
+  { label: 'Ca làm việc', path: '/admin/shifts', icon: Calendar },
+  { label: 'Bảo trì', path: '/admin/maintenance', icon: FileText },
+  { label: 'Hồ sơ', path: '/admin/profile', icon: User },
+  { label: '🧪 API Test', path: '/admin/api-test', icon: FileText },
 ];
 
 export const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
